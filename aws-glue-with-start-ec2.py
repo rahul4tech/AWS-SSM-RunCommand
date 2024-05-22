@@ -3,6 +3,7 @@ import time
 import json
 
 def run_script_on_ec2(instance_id, script_commands):
+    ec2_client = boto3.client('ec2')
     ssm_client = boto3.client('ssm')
 
     # Start the EC2 instance
