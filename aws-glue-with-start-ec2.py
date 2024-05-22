@@ -70,3 +70,10 @@ script_commands = [
 
 output = run_script_on_ec2(instance_id, script_commands)
 print(output)
+
+# Shutdown the EC2 instance after running the script
+ec2_client.stop_instances(InstanceIds=[instance_id])
+
+# Wait for the instance to be in the stopped state
+waiter = ec2_client.get_waiter('instance_stopped')
+waiter.wait(InstanceIds=[instance_id])
